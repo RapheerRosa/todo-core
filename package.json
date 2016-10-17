@@ -1,0 +1,31 @@
+{
+  "name": "todo-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RapheerRosa/todo-core.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RapheerRosa/todo-core/issues"
+  },
+  "homepage": "https://github.com/RapheerRosa/todo-core#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
+    "consign": "^0.1.2",
+    "express": "^4.14.0",
+    "express-validator": "^2.20.10",
+    "jwt-simple": "^0.5.0",
+    "mongoose": "^4.6.3",
+    "morgan": "^1.7.0",
+    "winston": "^2.2.0"
+  }
+}
