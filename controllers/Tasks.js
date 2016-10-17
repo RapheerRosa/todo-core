@@ -5,7 +5,6 @@ var Task = require('../models/Task'),
 module.exports = {
   getTasks: function (req, res) {
     var id = jwt.decode(req.headers['x-access-token'], secret).id;
-    console.log(Task);
     if (id) {
       Task.find({ _author: id })
         .then(function (tasks) {
@@ -61,7 +60,7 @@ module.exports = {
         task[key] = req.body[key];
     }
 
-    Task.update(req.params.id, task)
+    Task.findByIdAndUpdate(req.params.id, { $set: task }, { new: true })
       .then(function (task) {
         res.status(200).send(task);
       }).catch(function (error) {
@@ -97,7 +96,7 @@ module.exports = {
       res.status(400).send(errors);
     }
 
-    Task.update({ _id: req.params.id }, { done: true })
+    Task.findByIdAndUpdate(req.params.id, { $set: { done: true }}, { new: true })
       .then(function (status) {
         res.status(200).end();
       }).catch(function (error) {
