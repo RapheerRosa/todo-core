@@ -60,7 +60,7 @@ module.exports = {
         task[key] = req.body[key];
     }
 
-    Task.findByIdAndUpdate(req.params.id, { $set: task }, { new: true })
+    Task.update({ _id: req.params.id }, { $set: task }, { new: true })
       .then(function (task) {
         res.status(200).send(task);
       }).catch(function (error) {
@@ -86,8 +86,7 @@ module.exports = {
       });
   },
 
-  // TODO: test completion method
-  completeTask: function (req, res) {
+  toggleTask: function (req, res) {
     req.assert('id', 'Please, inform the Id of the task you want to delete').notEmpty();
 
     var errors = req.validationErrors();
@@ -95,12 +94,19 @@ module.exports = {
     if (errors) {
       res.status(400).send(errors);
     }
-
-    Task.findByIdAndUpdate(req.params.id, { $set: { done: true }}, { new: true })
-      .then(function (status) {
-        res.status(200).end();
+    var newValue = false;
+    Task.findOne({ _id: req.params.id })
+      .then(function (task) {
+        newValue = !task.done;
+        Task.update({ _id: req.params.id }, { $set: { done: newValue }}, { new: true })
+        .then(function (status) {
+          res.status(200).end();
+        }).catch(function (error) {
+          res.status(500).send(error);
+        });
       }).catch(function (error) {
         res.status(500).send(error);
       });
+
   }
 }
