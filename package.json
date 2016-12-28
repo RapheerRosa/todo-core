@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/RapheerRosa/todo-core#readme",
   "dependencies": {
-    "bcrypt": "^0.8.7",
+    "bcryptjs": "latest",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "consign": "^0.1.2",
